@@ -1,4 +1,4 @@
-.popup__about-user {
+.popup__input_type_about-user {
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -6,7 +6,7 @@
     margin-bottom: 48px;
 }
 @media (max-width: 600px) {
-    .popup__about-user {
+    .popup__input_type_about-user {
         margin-bottom: 45px;
     }
 }
