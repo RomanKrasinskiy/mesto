@@ -1,0 +1,14 @@
+.pupup__input {
+    width: 100%;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    min-height: 27px;
+}
+@media (max-width: 600px) {
+    .popup__input {
+       max-width: 238px;
+
+    }
+}
