@@ -1,13 +1,13 @@
-let userName = document.querySelector('.profile__user-name'); // Называем поле -имя
-let aboutUser = document.querySelector('.profile__about-user'); // Называем поле -информация о пользователе
-let editButton = document.querySelector('.edit-button'); // Называем кнопку редактирования профиля
-let popupElement = document.querySelector('.popup'); // Называем всплывающее окно
-let closeButton = document.querySelector('.popup__close-button'); // Называем кнопку закрытия всплывающего окна
+let userName = document.querySelector('.profile__user-name');
+let aboutUser = document.querySelector('.profile__about-user');
+let editButton = document.querySelector('.edit-button');
+let popupElement = document.querySelector('.popup');
+let closeButton = document.querySelector('.popup__close-button');
 // Находим форму в DOM
-let formElement = document.querySelector('.popup__form'); // Воспользуйтесь методом querySelector()
+let formElement = document.querySelector('.popup__form');
 // Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__input_type_userName'); // Воспользуйтесь инструментом .querySelector()
-let jobInput = document.querySelector('.popup__input_type_aboutUser'); // Воспользуйтесь инструментом .querySelector()
+let nameInput = document.querySelector('.popup__input_type_username');
+let jobInput = document.querySelector('.popup__input_type_about-user');
 
 // Открываем окно 
 function openPopup() {
@@ -30,9 +30,6 @@ function formSubmitHandler (evt) {
                                                 // Так мы можем определить свою логику отправки.
                                                 // О том, как это делать, расскажем позже.
 
-    // Получите значение полей jobInput и nameInput из свойства value
-    // Выберите элементы, куда должны быть вставлены значения полей
-    // Вставьте новые значения с помощью textContent
     userName.textContent = nameInput.value;
     aboutUser.textContent = jobInput.value;
     closePopup();

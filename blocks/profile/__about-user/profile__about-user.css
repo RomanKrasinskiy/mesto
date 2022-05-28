@@ -1,10 +1,9 @@
 .profile__about-user {
-    margin: 7px 0 0;
+	margin: 7px 0 0;
 	padding: 0;
-	font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
+	font-style: normal;font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	grid-area: profile__about-user;

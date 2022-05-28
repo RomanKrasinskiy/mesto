@@ -1,7 +1,6 @@
 .profile {
     margin: 0px auto;
     display: grid;
-    height: 120px;
     max-width: 880px;
     grid-template-areas:
     "profile__photo profile__user-name edit-button add-button"
@@ -26,7 +25,7 @@
 @media (max-width: 680px) {
 	.profile {
 		width: 282px;
-		height: 286px;
+		min-height: 286px;
 		grid-template-areas: 
 		"profile__photo profile__photo profile__photo"
 		"null profile__user-name edit-button"
