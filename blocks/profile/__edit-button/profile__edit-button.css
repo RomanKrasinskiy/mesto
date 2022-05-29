@@ -1,6 +1,14 @@
 .profile__edit-button {
 	margin-top: 37px;
 	background-color: black;
+	opacity: 1;
+	transition-property: opacity;
+	transition-duration: 0.7s;
+}
+.profile__edit-button:hover {
+	opacity: 0.6;
+	transition-property: opacity;
+	transition-duration: 0.7s;
 }
 
 @media (max-width: 960px) {
@@ -15,3 +23,5 @@
 		margin-left: 6px;
 	}
 }
+
+

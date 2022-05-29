@@ -11,3 +11,7 @@
     border: none;
     background-color: #fff;
 }
+.element__like:hover {
+    opacity: 0.5s;
+    transition: opacity 0.5s linear;
+}

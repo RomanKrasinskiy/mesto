@@ -9,10 +9,16 @@
 	text-decoration: none;
 	border: none;
 	border-radius: 2px;
+	cursor: pointer;
 	margin: auto;
+	opacity: 1;
+	transition-property: opacity;
+	transition-duration: 0.7s;
 }
 .popup__save-button:hover {
 	opacity: 0.8;
+	transition-property: opacity;
+	transition-duration: 0.7s;
 }
 @media (max-width: 600px) {
 	.popup__save-button {
