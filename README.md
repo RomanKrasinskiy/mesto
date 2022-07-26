@@ -1,4 +1,4 @@
-### *Учебный проект от [Яндекс.Практикум] доступен по ссылке (https://romankrasinskiy.github.io/mesto/index.html)
+### *Учебный проект от [Яндекс.Практикум] доступен по ссылке (https://romankrasinskiy.github.io/mesto/)
 
 # Проект: Место
 ## Описание проекта
