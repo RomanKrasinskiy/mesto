@@ -8,9 +8,11 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
+    margin-bottom: 30px;
 }
 @media (max-width: 600px) {
     .popup__input {
        max-width: 238px;
+       margin-bottom: 45px;
     }
 }

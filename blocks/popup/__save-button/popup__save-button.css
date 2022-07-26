@@ -10,10 +10,11 @@
 	border: none;
 	border-radius: 2px;
 	cursor: pointer;
-	margin: auto;
+	margin: 18px auto auto;
 	opacity: 1;
 	transition-property: opacity;
 	transition-duration: 0.7s;
+	padding: 0;
 }
 .popup__save-button:hover {
 	opacity: 0.8;
