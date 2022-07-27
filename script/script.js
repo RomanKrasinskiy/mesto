@@ -19,20 +19,20 @@ const cardList = document.querySelector('.elements');
 
 // Создаем карточку по шаблону и наполняем данными из массива
 function createNewCard (name, link) {
-  const listElements = templateCard.cloneNode(true);
-  const elementName = listElements.querySelector('.element__name'); // название карточки
-  const elementImage = listElements.querySelector('.element__photo'); // картинка 
-  const elementNameAlt = listElements.querySelector('.element__photo'); // альт
+  const card = templateCard.cloneNode(true);
+  const elementName = card.querySelector('.element__name'); // название карточки
+  const elementImage = card.querySelector('.element__photo'); // картинка 
+  const elementNameAlt = card.querySelector('.element__photo'); // альт
   elementName.textContent = name;
   elementImage.src = link;
   elementNameAlt.alt = name;
-  const likeButton = listElements.querySelector('.element__like');
+  const likeButton = card.querySelector('.element__like');
   likeButton.addEventListener('click', handleLikeClick);
-  const buttonDeleteCard = listElements.querySelector('.element__delete-ico');
-  buttonDeleteCard.addEventListener('click', hendleDeleteCard);
-  const cardImg = listElements.querySelector('.element__photo');
+  const buttonDeleteCard = card.querySelector('.element__delete-ico');
+  buttonDeleteCard.addEventListener('click', handleDeleteCard);
+  const cardImg = card.querySelector('.element__photo');
   cardImg.addEventListener('click', openPopupImg);
-  return listElements;
+  return card;
 };
 
 // Достаем карточки из массива
@@ -44,8 +44,8 @@ function renderCardsList(data) {
 };
 
 // вставляем карточку в грид разметку
-function cardElement (listElements) {
-  cardList.prepend(listElements);
+function cardElement (card) {
+  cardList.prepend(card);
 };
 
 // Добавляем дефолтные 6 карточек на страницу при загрузке сайта
@@ -78,15 +78,14 @@ function openPopupEdit() {
 
 // Открываем окно ручного создания новой карточки
 function openPopupAddCard() {
-  placeName.value = null;
-  placeLink.value = null;
+  formElementAddCard.reset();
   openPopup(popupAddCard);
 };
 
 // Удаление карточки
-function hendleDeleteCard(evt) {
-  const takeCard = evt.target.closest('.element');
-  takeCard.remove();
+function handleDeleteCard(evt) {
+  const cardСlosed = evt.target.closest('.element');
+  cardСlosed.remove();
 };
 
 // Активная иконка лайка
@@ -96,7 +95,7 @@ function handleLikeClick(evt) {
 
 
 // Обработчик «отправки» формы.
-function handleFormSubmit (evt) {
+function handleEditFormSubmit (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   userName.textContent = nameInput.value;
   aboutUser.textContent = jobInput.value;
@@ -112,10 +111,10 @@ function handleFormAddCard (evt) {
 };
 
 // Общая функция для кнопки закрытия попапа.Крестик.
-popupElements.forEach((buttonDeleteCard) => {
-  buttonDeleteCard.addEventListener('click', (evt) => {
+popupElements.forEach((deleteCard) => {
+  deleteCard.addEventListener('click', (evt) => {
     if(evt.target.classList.contains('popup__close-ico')) {
-      closePopup(buttonDeleteCard);
+      closePopup(deleteCard);
     }
   })
 });
@@ -124,5 +123,5 @@ editButton.addEventListener('click', openPopupEdit); // Событие нажа�
 addButton.addEventListener('click', openPopupAddCard); // Событие нажания на кнопку добавлеиня новой карточки
 
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
-formElementEditName.addEventListener('submit', handleFormSubmit);
+formElementEditName.addEventListener('submit', handleEditFormSubmit);
 formElementAddCard.addEventListener('submit', handleFormAddCard);
