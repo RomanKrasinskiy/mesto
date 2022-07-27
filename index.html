@@ -36,8 +36,8 @@
                 </button>
                 <form name="profileForm" class="popup__form popup__form_type_edit-name">
                     <h3 class="popup__title">Редактировать&nbsp;профиль</h3>
-                    <input type="text" name="username" class="popup__input popup__input_type_username popup__input_value_username">
-                    <input type="text" name="user-job" class="popup__input popup__input_type_about-user popup__input_value_about-user">
+                    <input type="text" name="username"  required class="popup__input popup__input_type_username popup__input_value_username">
+                    <input type="text" name="user-job"  required class="popup__input popup__input_type_about-user popup__input_value_about-user">
                     <button type="submit" class="popup__save-button">Сохранить</button>
                 </form>
             </section>
@@ -53,11 +53,13 @@
                     <input class="popup__input popup__input_type_place-name popup__input_value_place-name" 
                         type="text" 
                         name="place-name" 
-                        placeholder="Название">
+                        placeholder="Название"
+                        required>
                     <input class="popup__input popup__input_type_place-link popup__input_value_place-link" 
-                        type="link" 
+                        type="src" 
                         name="place-link" 
-                        placeholder="Ссылка на картинку">
+                        placeholder="Ссылка на картинку"
+                        required>
                     <button type="submit" class="popup__save-button">Создать</button>
                 </form>
             </section>
@@ -88,6 +90,7 @@
             </div>
         </div>
     </template>
+<script src="./script/cards.js"></script>
 <script src="./script/script.js"></script>
 </body>
 </html>
