@@ -39,12 +39,12 @@ function createNewCard (name, link) {
 function renderCardsList(data) {
     data.forEach(function (item) {
       const newCard = createNewCard(item.name, item.link);
-      cardElement(newCard);
+      renderCard(newCard);
     })
 };
 
-// вставляем карточку в грид разметку
-function cardElement (card) {
+// Вставляем карточку в грид разметку
+function renderCard (card) {
   cardList.prepend(card);
 };
 
@@ -93,7 +93,6 @@ function handleLikeClick(evt) {
   evt.target.classList.toggle('element__like_active');
 };
 
-
 // Обработчик «отправки» формы.
 function handleEditFormSubmit (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
@@ -106,17 +105,16 @@ function handleEditFormSubmit (evt) {
 function handleFormAddCard (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   const newCard = createNewCard(placeName.value, placeLink.value);
-  cardElement(newCard);
+  renderCard(newCard);
   closePopup(popupAddCard);
 };
 
 // Общая функция для кнопки закрытия попапа.Крестик.
-popupElements.forEach((deleteCard) => {
-  deleteCard.addEventListener('click', (evt) => {
-    if(evt.target.classList.contains('popup__close-ico')) {
-      closePopup(deleteCard);
-    }
-  })
+popupElements.forEach((popup) => {
+  const buttonClose = popup.querySelector('.popup__close-ico')
+  buttonClose.addEventListener('click', () => {
+          closePopup(popup);
+        })
 });
 
 editButton.addEventListener('click', openPopupEdit); // Событие нажания на кнопку редактирования профиля
