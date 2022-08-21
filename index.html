@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/icons8.png">
-    <link rel="stylesheet" href="pages/index.css">
+    <link rel="stylesheet" href="styles/index.css">
     <title>Mesto</title>
 </head>
 <body class="page">
@@ -28,20 +28,40 @@
         <footer class="page__footer footer">
             <p class="footer__copyright">© 2022 Mesto Russia</p>
         </footer>
+        
 <!-- Попап редактирования профиля -->
         <div class="popup popup_type_edit-name">
             <section class="popup__container">
                 <button type="button" class="popup__close-button">
                     <img class="popup__close-ico" src="./images/CloseIcon.svg" alt="Закрыть">
                 </button>
-                <form name="profileForm" class="popup__form popup__form_type_edit-name">
+                <form name="profileForm" class="popup__form popup__form_type_edit-name" novalidate>
                     <h3 class="popup__title">Редактировать&nbsp;профиль</h3>
-                    <input type="text" name="username"  required class="popup__input popup__input_type_username popup__input_value_username">
-                    <input type="text" name="user-job"  required class="popup__input popup__input_type_about-user popup__input_value_about-user">
+                    <div class="popup__input-form-item">
+                        <input id="user-name-input"
+                        class="popup__input popup__input_type_username popup__input_value_username"
+                        type="text" 
+                        name="username"
+                        minlength="2"
+                        maxlength="40"
+                        required>
+                        <span class="popup__input-error user-name-input-error"></span>
+                    </div>
+                    <div class="popup__input-form-item">
+                        <input id="user-job-input"
+                        class="popup__input popup__input_type_about-user popup__input_value_about-user"
+                        type="text" 
+                        name="user-job" 
+                        minlength="2"
+                        maxlength="200"
+                        required>
+                        <span class="popup__input-error user-job-input-error"></span>
+                    </div>
                     <button type="submit" class="popup__save-button">Сохранить</button>
                 </form>
             </section>
         </div>
+
 <!-- Попап добавления названия и картинки новой карточки -->
         <div class="popup popup_type_add-card">
             <section class="popup__container">
@@ -50,17 +70,27 @@
                 </button>
                 <form name="add-card" class="popup__form popup__form_type_add-card">
                     <h3 class="popup__title">Новое&nbsp;место</h3>
-                    <input class="popup__input popup__input_type_place-name popup__input_value_place-name" 
+                    <div class="popup__input-form-item">
+                        <input id="place-name-input"
+                        class="popup__input popup__input_type_place-name popup__input_value_place-name" 
                         type="text" 
                         name="place-name" 
                         placeholder="Название"
+                        minlength="2"
+                        maxlength="30"
                         required>
-                    <input class="popup__input popup__input_type_place-link popup__input_value_place-link" 
-                        type="src" 
+                        <span class="popup__input-error place-name-input-error"></span>
+                    </div>
+                    <div class="popup__input-form-item">
+                        <input id="place-link-input"
+                        class="popup__input popup__input_type_place-link popup__input_value_place-link" 
+                        type="url" 
                         name="place-link" 
                         placeholder="Ссылка на картинку"
                         required>
-                    <button type="submit" class="popup__save-button">Создать</button>
+                        <span class="popup__input-error place-link-input-error"></span>
+                    </div>
+                    <button type="submit" class="popup__save-button popup__save-button_inactive">Создать</button>
                 </form>
             </section>
         </div>
@@ -92,5 +122,6 @@
     </template>
 <script src="./script/cards.js"></script>
 <script src="./script/script.js"></script>
+<script src="./script/validate.js"></script>
 </body>
 </html>

@@ -61,12 +61,15 @@ function openPopupImg(evt) {
 
 // Окно открытия попапа
 function openPopup(popupElement) {
+  document.addEventListener('keydown', handleEscapeClosePopup);
   popupElement.classList.add('popup_active');
+  
 };
 
 // Окно закрытия попапа
 function closePopup(popupElement) {
-	popupElement.classList.remove('popup_active');
+	document.removeEventListener('keydown', handleEscapeClosePopup);
+  popupElement.classList.remove('popup_active');
 };
 
 // Открытие окна редактирования профиля
@@ -80,6 +83,7 @@ function openPopupEdit() {
 function openPopupAddCard() {
   formElementAddCard.reset();
   openPopup(popupAddCard);
+  document.addEventListener('keydown', handleEscapeClosePopup);
 };
 
 // Удаление карточки
@@ -109,12 +113,22 @@ function handleFormAddCard (evt) {
   closePopup(popupAddCard);
 };
 
-// Общая функция для кнопки закрытия попапа.Крестик.
+// Закрываем попап по нажанию клавиши ESC.
+function handleEscapeClosePopup (evt) {
+  const popupActive = document.querySelector('.popup_active');
+  if (evt.key === "Escape") {
+    closePopup(popupActive);
+  };
+};
+
+// Общая функция для кнопки закрытия попапа.Крестик || Пространство вокруг попапа.
 popupElements.forEach((popup) => {
-  const buttonClose = popup.querySelector('.popup__close-ico')
-  buttonClose.addEventListener('click', () => {
-          closePopup(popup);
-        })
+  popup.addEventListener('click', (evt) => {
+    const popupContainer = popup.querySelector('.popup__container');
+    if (evt.target.classList.contains('popup__close-ico') || !popupContainer.contains(evt.target)) {
+      closePopup(popup);
+    }
+  });
 });
 
 editButton.addEventListener('click', openPopupEdit); // Событие нажания на кнопку редактирования профиля
