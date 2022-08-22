@@ -2,7 +2,7 @@ const templateCard = document.querySelector('.card').content;
 const popupElements = document.querySelectorAll('.popup');
 const userName = document.querySelector('.profile__user-name');
 const aboutUser = document.querySelector('.profile__about-user');
-const editButton = document.querySelector('.edit-button');
+const buttonEditProfile = document.querySelector('.edit-button');
 const addButton = document.querySelector('.add-button');
 const popupEditName = document.querySelector('.popup_type_edit-name');
 const nameInput = popupEditName.querySelector('.popup__input_value_username');
@@ -15,6 +15,7 @@ const formElementEditName = popupEditName.querySelector('.popup__form_type_edit-
 const popupZoomImg = document.querySelector('.popup_type_zoom-img');
 const zoomMainImg = document.querySelector('.popup__zoom-main-img');
 const zoomCaption = document.querySelector('.popup__zoom-caption');
+
 const cardList = document.querySelector('.elements');
 
 // Создаем карточку по шаблону и наполняем данными из массива
@@ -39,13 +40,8 @@ function createNewCard (name, link) {
 function renderCardsList(data) {
     data.forEach(function (item) {
       const newCard = createNewCard(item.name, item.link);
-      renderCard(newCard);
+      cardList.prepend(newCard); // Вставляем карточку в грид разметку 
     })
-};
-
-// Вставляем карточку в грид разметку
-function renderCard (card) {
-  cardList.prepend(card);
 };
 
 // Добавляем дефолтные 6 карточек на страницу при загрузке сайта
@@ -70,6 +66,7 @@ function openPopup(popupElement) {
 function closePopup(popupElement) {
 	document.removeEventListener('keydown', handleEscapeClosePopup);
   popupElement.classList.remove('popup_active');
+  
 };
 
 // Открытие окна редактирования профиля
@@ -83,7 +80,6 @@ function openPopupEdit() {
 function openPopupAddCard() {
   formElementAddCard.reset();
   openPopup(popupAddCard);
-  document.addEventListener('keydown', handleEscapeClosePopup);
 };
 
 // Удаление карточки
@@ -109,14 +105,16 @@ function handleEditFormSubmit (evt) {
 function handleFormAddCard (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   const newCard = createNewCard(placeName.value, placeLink.value);
-  renderCard(newCard);
+  cardList.prepend(newCard);
   closePopup(popupAddCard);
+  const submitButtonSelector = popupAddCard.querySelector('.popup__save-button');
+  disableSubmitButton(submitButtonSelector, config);
 };
 
 // Закрываем попап по нажанию клавиши ESC.
 function handleEscapeClosePopup (evt) {
-  const popupActive = document.querySelector('.popup_active');
   if (evt.key === "Escape") {
+    const popupActive = document.querySelector('.popup_active');
     closePopup(popupActive);
   };
 };
@@ -124,14 +122,14 @@ function handleEscapeClosePopup (evt) {
 // Общая функция для кнопки закрытия попапа.Крестик || Пространство вокруг попапа.
 popupElements.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
-    const popupContainer = popup.querySelector('.popup__container');
-    if (evt.target.classList.contains('popup__close-ico') || !popupContainer.contains(evt.target)) {
+    const popupContainerClose = popup.querySelector('.popup__container-close');
+    if (evt.target.classList.contains('popup__close-ico') || !popupContainerClose.contains(evt.target)) {
       closePopup(popup);
     }
   });
 });
 
-editButton.addEventListener('click', openPopupEdit); // Событие нажания на кнопку редактирования профиля
+buttonEditProfile.addEventListener('click', openPopupEdit); // Событие нажания на кнопку редактирования профиля
 addButton.addEventListener('click', openPopupAddCard); // Событие нажания на кнопку добавлеиня новой карточки
 
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»

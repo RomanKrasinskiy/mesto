@@ -4,7 +4,8 @@ const config = {
     submitButtonSelector: '.popup__save-button',
     inactiveButtonClass: 'popup__save-button_inactive',
     inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_active'
+    errorClass: 'popup__input-error_active',
+    popupContainer: 'popup__container'
   }; 
 
 const hasInvalidInput = (inputList) => {
@@ -49,16 +50,26 @@ const setEventListenersInput = (formElement, config) => {
     });
 };
 
+// отключить кнопку отправки
+const disableSubmitButton = (buttonElement, config) => {
+    buttonElement.classList.add(config.inactiveButtonClass);
+    buttonElement.disabled = true;
+};
+
+// включить кнопку отправки
+const enableSubmitButton = (buttonElement, config) => {
+    buttonElement.classList.remove(config.inactiveButtonClass);
+    buttonElement.disabled = false;
+};
+
 const toggleButtonState = (inputList, buttonElement, config) => {
     // Если есть хотя бы один невалидный инпут
     if (hasInvalidInput(inputList)) {
       // сделай кнопку неактивной
-      buttonElement.classList.add('popup__save-button_inactive');
-      buttonElement.disabled = true;
+      disableSubmitButton(buttonElement, config);
     } else {
       // иначе сделай кнопку активной
-      buttonElement.classList.remove(config.inactiveButtonClass);
-      buttonElement.disabled = false;
+      enableSubmitButton(buttonElement, config);
     }
   }; 
   

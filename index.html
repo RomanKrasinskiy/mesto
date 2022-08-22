@@ -31,7 +31,7 @@
         
 <!-- Попап редактирования профиля -->
         <div class="popup popup_type_edit-name">
-            <section class="popup__container">
+            <section class="popup__container popup__container-close">
                 <button type="button" class="popup__close-button">
                     <img class="popup__close-ico" src="./images/CloseIcon.svg" alt="Закрыть">
                 </button>
@@ -64,11 +64,11 @@
 
 <!-- Попап добавления названия и картинки новой карточки -->
         <div class="popup popup_type_add-card">
-            <section class="popup__container">
+            <section class="popup__container popup__container-close">
                 <button type="button" class="popup__close-button">
                     <img class="popup__close-ico" src="./images/CloseIcon.svg" alt="Закрыть">
                 </button>
-                <form name="add-card" class="popup__form popup__form_type_add-card">
+                <form name="add-card" class="popup__form popup__form_type_add-card" novalidate>
                     <h3 class="popup__title">Новое&nbsp;место</h3>
                     <div class="popup__input-form-item">
                         <input id="place-name-input"
@@ -96,7 +96,7 @@
         </div>
 <!-- Попап увеличение загруженого фото -->
         <div class="popup popup_type_zoom-img">
-            <section class="popup__zoom-container">
+            <section class="popup__zoom-container popup__container-close">
                 <button type="button" class="popup__close-button">
                     <img class="popup__close-ico" src="./images/CloseIcon.svg" alt="Закрыть">
                 </button>
