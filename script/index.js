@@ -1,4 +1,27 @@
-const templateCard = document.querySelector('.card').content;
+import { initialCards } from "./initialCards.js";
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+
+const formConfigSelector = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+  popupContainer: 'popup__container'
+};
+
+const cardSelector = {
+  template: '.card',
+  card: '.element',
+  name: '.element__name',
+  likeButton: '.element__like',
+  buttonDeleteCard: '.element__delete-ico',
+  cardImg: '.element__photo',
+  likeActive: 'element__like_active',
+};
+
 const popupElements = document.querySelectorAll('.popup');
 const userName = document.querySelector('.profile__user-name');
 const aboutUser = document.querySelector('.profile__about-user');
@@ -15,43 +38,34 @@ const formElementEditName = popupEditName.querySelector('.popup__form_type_edit-
 const popupZoomImg = document.querySelector('.popup_type_zoom-img');
 const zoomMainImg = document.querySelector('.popup__zoom-main-img');
 const zoomCaption = document.querySelector('.popup__zoom-caption');
-
 const cardList = document.querySelector('.elements');
 
+const addCardFormValidation = new FormValidator (formConfigSelector, formElementAddCard);
+addCardFormValidation.enableValidation();
+const editNameFormValidation = new FormValidator (formConfigSelector, formElementEditName);
+editNameFormValidation.enableValidation();
+
 // Создаем карточку по шаблону и наполняем данными из массива
-function createNewCard (name, link) {
-  const card = templateCard.cloneNode(true);
-  const elementName = card.querySelector('.element__name'); // название карточки
-  const elementImage = card.querySelector('.element__photo'); // картинка 
-  const elementNameAlt = card.querySelector('.element__photo'); // альт
-  elementName.textContent = name;
-  elementImage.src = link;
-  elementNameAlt.alt = name;
-  const likeButton = card.querySelector('.element__like');
-  likeButton.addEventListener('click', handleLikeClick);
-  const buttonDeleteCard = card.querySelector('.element__delete-ico');
-  buttonDeleteCard.addEventListener('click', handleDeleteCard);
-  const cardImg = card.querySelector('.element__photo');
-  cardImg.addEventListener('click', openPopupImg);
-  return card;
-};
+function createNewCard(item) {
+  const newCard = new Card (cardSelector, item.name, item.link, openPopupImg);
+  return newCard.generateCard();
+}
 
 // Достаем карточки из массива
 function renderCardsList(data) {
     data.forEach(function (item) {
-      const newCard = createNewCard(item.name, item.link);
-      cardList.prepend(newCard); // Вставляем карточку в грид разметку 
-    })
+      cardList.prepend(createNewCard(item)); // Вставляем карточку в грид разметку 
+    });
 };
 
-// Добавляем дефолтные 6 карточек на страницу при загрузке сайта
+// Добавляем дефолтные карточки на страницу при загрузке сайта
 renderCardsList(initialCards);
 
 // Подгрузка маленькой img, и наименований в попапZoom
-function openPopupImg(evt) {
-  zoomMainImg.src = evt.target.src;
-  zoomMainImg.alt = evt.target.alt;
-  zoomCaption.textContent = evt.target.alt;
+function openPopupImg(name, link) {
+  zoomMainImg.src = link;
+  zoomMainImg.alt = name;
+  zoomCaption.textContent = name;
   openPopup(popupZoomImg);
 };
 
@@ -82,17 +96,6 @@ function openPopupAddCard() {
   openPopup(popupAddCard);
 };
 
-// Удаление карточки
-function handleDeleteCard(evt) {
-  const cardСlosed = evt.target.closest('.element');
-  cardСlosed.remove();
-};
-
-// Активная иконка лайка
-function handleLikeClick(evt) {
-  evt.target.classList.toggle('element__like_active');
-};
-
 // Обработчик «отправки» формы.
 function handleEditFormSubmit (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
@@ -104,11 +107,14 @@ function handleEditFormSubmit (evt) {
 // Ручное создание карточки.
 function handleFormAddCard (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  const newCard = createNewCard(placeName.value, placeLink.value);
-  cardList.prepend(newCard);
+  const data = {
+    name: placeName.value,
+    link: placeLink.value
+  };
+  const handleNewCard = createNewCard(data);
+  cardList.prepend(handleNewCard);
   closePopup(popupAddCard);
-  const submitButtonSelector = popupAddCard.querySelector('.popup__save-button');
-  disableSubmitButton(submitButtonSelector, config);
+  addCardFormValidation.resetValid();
 };
 
 // Закрываем попап по нажанию клавиши ESC.
