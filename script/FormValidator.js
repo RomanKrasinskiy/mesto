@@ -1,9 +1,9 @@
 export class FormValidator {
     constructor(validationConfig, form) {
-        this._selector = validationConfig;
+        this._validationConfig = validationConfig;
         this._placeForm = form;
-        this._buttonElement = this._placeForm.querySelector(this._selector.submitButtonSelector);
-        this._inputList = Array.from(this._placeForm.querySelectorAll(this._selector.inputSelector));
+        this._buttonElement = this._placeForm.querySelector(this._validationConfig.submitButtonSelector);
+        this._inputList = Array.from(this._placeForm.querySelectorAll(this._validationConfig.inputSelector));
     }
     // проверяем валидность поля
     _checkInputValidity(inputElement) {
@@ -16,15 +16,15 @@ export class FormValidator {
     // добавляем класс с ошибкой
     _showInputError(inputElement, errorMessage) {
         const errorElement = this._placeForm.querySelector(`.${inputElement.id}-error`);
-        inputElement.classList.add(this._selector.inputErrorClass);
+        inputElement.classList.add(this._validationConfig.inputErrorClass);
         errorElement.textContent = errorMessage;
-        errorElement.classList.add(this._selector.errorClass);
+        errorElement.classList.add(this._validationConfig.errorClass);
     }
     // удаляем класс с ошибкой
     _hideInputError(inputElement) {
         const errorElement = this._placeForm.querySelector(`.${inputElement.id}-error`);
-        inputElement.classList.remove(this._selector.inputErrorClass);
-        errorElement.classList.remove(this._selector.errorClass);
+        inputElement.classList.remove(this._validationConfig.inputErrorClass);
+        errorElement.classList.remove(this._validationConfig.errorClass);
         errorElement.textContent = "";
     }
     _hasInvalidInput() {
@@ -43,11 +43,11 @@ export class FormValidator {
     }
 
     _disableSubmitButton() {
-        this._buttonElement.classList.add(this._selector.inactiveButtonClass);
+        this._buttonElement.classList.add(this._validationConfig.inactiveButtonClass);
         this._buttonElement.disabled = true;
     }
     _enableSubmitButton() {
-        this._buttonElement.classList.remove(this._selector.inactiveButtonClass);
+        this._buttonElement.classList.remove(this._validationConfig.inactiveButtonClass);
         this._buttonElement.disabled = false;
     }
     _toggleButtonState() {
