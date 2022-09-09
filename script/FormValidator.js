@@ -1,9 +1,9 @@
 export class FormValidator {
-    constructor(selector, form) {
-        this._selector = selector;
-        this._element = form;
-        this._buttonElement = this._element.querySelector(this._selector.submitButtonSelector);
-        this._inputList = Array.from(this._element.querySelectorAll(this._selector.inputSelector));
+    constructor(validationConfig, form) {
+        this._selector = validationConfig;
+        this._placeForm = form;
+        this._buttonElement = this._placeForm.querySelector(this._selector.submitButtonSelector);
+        this._inputList = Array.from(this._placeForm.querySelectorAll(this._selector.inputSelector));
     }
     // проверяем валидность поля
     _checkInputValidity(inputElement) {
@@ -15,14 +15,14 @@ export class FormValidator {
 
     // добавляем класс с ошибкой
     _showInputError(inputElement, errorMessage) {
-        const errorElement = this._element.querySelector(`.${inputElement.id}-error`);
+        const errorElement = this._placeForm.querySelector(`.${inputElement.id}-error`);
         inputElement.classList.add(this._selector.inputErrorClass);
         errorElement.textContent = errorMessage;
         errorElement.classList.add(this._selector.errorClass);
     }
     // удаляем класс с ошибкой
     _hideInputError(inputElement) {
-        const errorElement = this._element.querySelector(`.${inputElement.id}-error`);
+        const errorElement = this._placeForm.querySelector(`.${inputElement.id}-error`);
         inputElement.classList.remove(this._selector.inputErrorClass);
         errorElement.classList.remove(this._selector.errorClass);
         errorElement.textContent = "";
@@ -64,12 +64,10 @@ export class FormValidator {
     resetValid() {
         this._disableSubmitButton();
         this._inputList.forEach((inputElement) => {
-            inputElement.addEventListener('input', () => {
-                this._checkInputValidity(inputElement);
-                this._toggleButtonState();
-            })
+            this._hideInputError(inputElement);
         })
     }
+
     enableValidation() {
         this._setEventListenersInput();
     }

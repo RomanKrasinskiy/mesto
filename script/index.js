@@ -46,15 +46,15 @@ const editNameFormValidation = new FormValidator (formConfigSelector, formElemen
 editNameFormValidation.enableValidation();
 
 // Создаем карточку по шаблону и наполняем данными из массива
-function createNewCard(item) {
-  const newCard = new Card (cardSelector, item.name, item.link, openPopupImg);
+function createNewCard(cardData) {
+  const newCard = new Card (cardSelector, cardData.name, cardData.link, openPopupImg);
   return newCard.generateCard();
 }
 
 // Достаем карточки из массива
 function renderCardsList(data) {
-    data.forEach(function (item) {
-      cardList.prepend(createNewCard(item)); // Вставляем карточку в грид разметку 
+    data.forEach(function (cardData) {
+      cardList.prepend(createNewCard(cardData)); // Вставляем карточку в грид разметку 
     });
 };
 
@@ -78,7 +78,7 @@ function openPopup(popupElement) {
 
 // Окно закрытия попапа
 function closePopup(popupElement) {
-	document.removeEventListener('keydown', handleEscapeClosePopup);
+  document.removeEventListener('keydown', handleEscapeClosePopup);
   popupElement.classList.remove('popup_active');
   
 };
@@ -105,7 +105,7 @@ function handleEditFormSubmit (evt) {
 };
 
 // Ручное создание карточки.
-function handleFormAddCard (evt) {
+function handleFormSubmitAddCard (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   const data = {
     name: placeName.value,
@@ -140,4 +140,4 @@ addButton.addEventListener('click', openPopupAddCard); // Событие наж�
 
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElementEditName.addEventListener('submit', handleEditFormSubmit);
-formElementAddCard.addEventListener('submit', handleFormAddCard);
+formElementAddCard.addEventListener('submit', handleFormSubmitAddCard);
