@@ -35,14 +35,14 @@ popupEditProfile.setEventListeners();
 
 const newUserInfo = new UserInfo(userDataSelector);
 
-const renderingCards = new Section( 
+const cardsList = new Section( 
 { 
   dataBase: initialCards,
   renderer: (item) => {
-    renderingCards.addItem(createNewCard(item));
+    cardsList.addItem(createNewCard(item));
   }
 }, cardList);
-renderingCards.rendererAll();
+cardsList.rendererAll();
 
 
 // Создаем карточку по шаблону и наполняем данными 
@@ -57,7 +57,7 @@ function handleCardClick(name, link) {
 };
 
 function handleCardSubmit(inputValues) {
-  renderingCards.addItem(createNewCard(inputValues))
+  cardsList.addItem(createNewCard(inputValues))
 
 };
 

@@ -9,11 +9,11 @@ export class PopupWithForm extends Popup {
     }
     // получаем значение инпута, вкладываем в новый объект и его возвращаем
     _getInputValues() {
-        this._newInputObj = {};
+        this._inputValues = {};
         this._inputList.forEach(input => {
-            this._newInputObj[input.name] = input.value;
+            this._inputValues[input.name] = input.value;
         }); 
-        return this._newInputObj;
+        return this._inputValues;
        
     }
     // слушатель помимо стандартного закрытия попапа передает объект с новыми данными
@@ -30,9 +30,9 @@ export class PopupWithForm extends Popup {
         super.close();
     }
     // возврат исходного значения(получаем из объекта с данными и вкладываем в инпут)
-    setInputValues(obj) {
+    setInputValues(dataToSetup) {
         this._inputList.forEach(input => {
-          input.value = obj[input.name];
+          input.value = dataToSetup[input.name];
         })
     }
 }
