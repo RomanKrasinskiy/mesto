@@ -4,24 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="images/icons8.png">
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="icon" href="<%=require('./images/icons8-багаж-64.png')%>">
     <title>Mesto</title>
 </head>
 <body class="page">
     <header class="page__header header">
-        <img class="header__logo logo" src="./images/logo.svg" alt="Логотип 'Mesto Russia'">
+        <img class="header__logo logo" src="<%=require('./images/logo.svg')%>" alt="Логотип 'Mesto Russia'">
     </header>
     <main>
         <section class="page__profile profile">
-            <img class="profile__photo" src="./images/Cousteau.jpg" alt="Фото">
+            <img class="profile__photo" src="<%=require('./images/Cousteau.jpg')%>" alt="Фото">
             <h1 class="profile__user-name">Жак-Ив Кусто</h1>
             <p class="profile__about-user">Исследователь океана</p>
             <button class="profile__edit-button edit-button" type="button">
-                <img class="edit-button__icon" src="./images/change.png" alt="Редактировать">
+                <img class="edit-button__icon" src="<%=require('./images/change.png')%>" alt="Редактировать">
             </button>
             <button class="profile__add-button add-button" type="button">
-                <img class="add-button__icon" src="./images/add-button.png" alt="Добавить">
+                <img class="add-button__icon" src="<%=require('./images/add-button.png')%>" alt="Добавить">
             </button>
         </section>
         <section class="page__elements elements"></section>
@@ -33,28 +32,30 @@
         <div class="popup popup_type_edit-name">
             <section class="popup__container popup__container-close">
                 <button type="button" class="popup__close-button">
-                    <img class="popup__close-ico" src="./images/CloseIcon.svg" alt="Закрыть">
+                    <img class="popup__close-ico" src="<%=require('./images/CloseIcon.svg')%>" alt="Закрыть">
                 </button>
                 <form name="profileForm" class="popup__form popup__form_type_edit-name" novalidate>
                     <h3 class="popup__title">Редактировать&nbsp;профиль</h3>
                     <div class="popup__input-form-item">
                         <input id="user-name-input"
-                        class="popup__input popup__input_type_username popup__input_value_username"
+                        class="popup__input popup__input_type_username"
                         type="text" 
-                        name="username"
+                        name="userName"
                         minlength="2"
                         maxlength="40"
-                        required>
+                        required
+                        placeholder="Ваше имя">>
                         <span class="popup__input-error user-name-input-error"></span>
                     </div>
                     <div class="popup__input-form-item">
                         <input id="user-job-input"
-                        class="popup__input popup__input_type_about-user popup__input_value_about-user"
+                        class="popup__input popup__input_type_about-user"
                         type="text" 
-                        name="user-job" 
+                        name="aboutUser" 
                         minlength="2"
                         maxlength="200"
-                        required>
+                        required
+                        placeholder="Ваше хобби">
                         <span class="popup__input-error user-job-input-error"></span>
                     </div>
                     <button type="submit" class="popup__save-button">Сохранить</button>
@@ -66,26 +67,27 @@
         <div class="popup popup_type_add-card">
             <section class="popup__container popup__container-close">
                 <button type="button" class="popup__close-button">
-                    <img class="popup__close-ico" src="./images/CloseIcon.svg" alt="Закрыть">
+                    <img class="popup__close-ico" src="<%=require('./images/CloseIcon.svg')%>" alt="Закрыть">
                 </button>
                 <form name="add-card" class="popup__form popup__form_type_add-card" novalidate>
                     <h3 class="popup__title">Новое&nbsp;место</h3>
                     <div class="popup__input-form-item">
                         <input id="place-name-input"
-                        class="popup__input popup__input_type_place-name popup__input_value_place-name" 
+                        class="popup__input popup__input_type_place-name" 
                         type="text" 
-                        name="place-name" 
+                        name="name" 
                         placeholder="Название"
                         minlength="2"
                         maxlength="30"
-                        required>
+                        required
+                        textContent="fsdfsdf">
                         <span class="popup__input-error place-name-input-error"></span>
                     </div>
                     <div class="popup__input-form-item">
                         <input id="place-link-input"
-                        class="popup__input popup__input_type_place-link popup__input_value_place-link" 
+                        class="popup__input popup__input_type_place-link" 
                         type="url" 
-                        name="place-link" 
+                        name="link" 
                         placeholder="Ссылка на картинку"
                         required>
                         <span class="popup__input-error place-link-input-error"></span>
@@ -98,7 +100,7 @@
         <div class="popup popup_type_zoom-img">
             <section class="popup__zoom-container popup__container-close">
                 <button type="button" class="popup__close-button">
-                    <img class="popup__close-ico" src="./images/CloseIcon.svg" alt="Закрыть">
+                    <img class="popup__close-ico" src="<%=require('./images/CloseIcon.svg')%>" alt="Закрыть">
                 </button>
                 <figure class="popup__zoom-container">
                     <img class="popup__zoom-main-img">
@@ -111,7 +113,7 @@
     <template class="card">
         <div class="element">
             <button class="element__delete" type="button" aria-label="Удалить">
-                <img class="element__delete-ico" src="./images/del.png">
+                <img class="element__delete-ico" src="<%=require('./images/del.png')%>">
             </button>
             <img class="element__photo">
             <div class="element__place">
@@ -120,7 +122,5 @@
             </div>
         </div>
     </template>
-
-<script src="./script/index.js" type="module"></script>
 </body>
 </html>

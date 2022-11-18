@@ -1,9 +1,9 @@
 export class Card {
-    constructor(cardElementsSelectors, name, link, openPopupImg) {
+    constructor(cardElementsSelectors, name, link, handleCardClick) {
         this._name = name;
         this._link = link;
         this._cardElementsSelectors = cardElementsSelectors;
-        this._openPopupImgZoom = openPopupImg;
+        this._handleCardClick = handleCardClick;
     }
     // получаем разметку карточки и возвращаем(шаблон)
     _getTemplate() {
@@ -17,7 +17,7 @@ export class Card {
     }
     // наполняем карточку данными
     generateCard() {
-        this._element = this._getTemplate();
+        this._getTemplate();
 
         this._elementName = this._element.querySelector(this._cardElementsSelectors.name);
         this._elementImg = this._element.querySelector(this._cardElementsSelectors.cardImg);
@@ -28,16 +28,18 @@ export class Card {
         this._setEventListeners();
         return this._element;
     }
-    
+    // слушатели отдельных функциональных элементов карточки
     _setEventListeners() {
         this._likeButton = this._element.querySelector(this._cardElementsSelectors.likeButton);
         this._likeButton.addEventListener('click', () => this._handleLikeClick());
         this._buttonDeleteCard = this._element.querySelector(this._cardElementsSelectors.buttonDeleteCard);
         this._buttonDeleteCard.addEventListener('click', () => this._handleDeleteCard());
         this._elementImg.addEventListener('click', () => this._openPopupImg());
+        
     }
+    // увеличенная картинка и подпись
     _openPopupImg() {
-        this._openPopupImgZoom(this._name, this._link);
+        this._handleCardClick(this._name, this._link);
     }
     // Удаление карточки
     _handleDeleteCard() {

@@ -3,7 +3,7 @@
     color: rgba(255, 0, 0, 1);
     opacity: 0;
     position: absolute;
-    top: calc(-24px + 100%);
+    top: 30px;
     left: 0;
     transition: 0.3s;
 }
