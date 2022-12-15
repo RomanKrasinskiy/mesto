@@ -10,7 +10,7 @@
 	border: none;
 	border-radius: 2px;
 	cursor: pointer;
-	margin: 18px auto auto;
+	margin: auto auto;
 	opacity: 1;
 	transition-property: opacity;
 	transition-duration: 0.7s;
@@ -31,6 +31,6 @@
 		max-height: 46px;
 		font-size: 14px;
 		line-height: 17px;
-		margin: 15px auto auto;
+		margin: auto auto;
 	}
 }

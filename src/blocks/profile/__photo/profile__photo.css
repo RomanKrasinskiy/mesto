@@ -1,12 +1,14 @@
 .profile__photo {
 	max-width: 120px;
+	min-height: 120px;
 	border-radius: 50%;
-	box-sizing: border-box;
-	grid-area: profile__photo;
+	transition: all 0.7s;
+	display: block;
+	margin: 0 auto;
+	object-fit: cover;
 }
 
-@media (max-width: 960px) {
-	.profile__photo {
-		margin: 0 auto;
-	}
+.profile__photo:hover {
+	opacity: 0.2;
+	cursor: pointer;
 }

@@ -13,6 +13,7 @@ module.exports = {
         filename: 'main.js',
         // publickPath: ''
     },
+    devtool: "inline-source-map",
     mode: 'development',
     devServer: {
         static: path.resolve(__dirname, './dist'),

@@ -13,9 +13,13 @@
     </header>
     <main>
         <section class="page__profile profile">
-            <img class="profile__photo" src="<%=require('./images/Cousteau.jpg')%>" alt="Фото">
-            <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-            <p class="profile__about-user">Исследователь океана</p>
+
+            <div class="profile__caption">
+                <img class="profile__photo" alt="Фото">
+            </div>
+
+            <h1 class="profile__user-name"></h1>
+            <p class="profile__about-user"></p>
             <button class="profile__edit-button edit-button" type="button">
                 <img class="edit-button__icon" src="<%=require('./images/change.png')%>" alt="Редактировать">
             </button>
@@ -39,26 +43,26 @@
                     <div class="popup__input-form-item">
                         <input id="user-name-input"
                         class="popup__input popup__input_type_username"
-                        type="text" 
-                        name="userName"
+                        type="text"
+                        name="name"
                         minlength="2"
                         maxlength="40"
                         required
-                        placeholder="Ваше имя">>
+                        placeholder="Ваше имя">
                         <span class="popup__input-error user-name-input-error"></span>
                     </div>
                     <div class="popup__input-form-item">
                         <input id="user-job-input"
                         class="popup__input popup__input_type_about-user"
                         type="text" 
-                        name="aboutUser" 
+                        name="about" 
                         minlength="2"
                         maxlength="200"
                         required
                         placeholder="Ваше хобби">
                         <span class="popup__input-error user-job-input-error"></span>
                     </div>
-                    <button type="submit" class="popup__save-button">Сохранить</button>
+                    <button type="submit" class="popup__save-button" value="Сохранить">Сохранить</button>
                 </form>
             </section>
         </div>
@@ -91,10 +95,47 @@
                         required>
                         <span class="popup__input-error place-link-input-error"></span>
                     </div>
-                    <button type="submit" class="popup__save-button popup__save-button_inactive">Создать</button>
+                    <button type="submit" class="popup__save-button popup__save-button_inactive" value="Создать">Создать</button>
                 </form>
             </section>
         </div>
+
+<!-- Попап переспросит, точно ли пользователь готов удалить карточку -->
+        <div class="popup popup_type_askDel">
+            <section class="popup__form popup__container popup__container-close">
+                <button type="button" class="popup__close-button">
+                    <img class="popup__close-ico" src="<%=require('./images/CloseIcon.svg')%>" alt="Закрыть">
+                </button>
+                <h3 class="popup__title popup__title_askDel">Вы уверены?</h3>
+                <form name="add-card" class="popup__form popup__form_type_add-card" novalidate>
+                    <button type="submit" class="popup__save-button">Да</button>
+                </form>
+            </section>
+        </div>
+
+<!-- Попап добавления фото профиля -->
+<div class="popup popup_type_updateAvatar">
+    <section class="popup__container popup__container-close">
+        <button type="button" class="popup__close-button">
+            <img class="popup__close-ico" src="<%=require('./images/CloseIcon.svg')%>" alt="Закрыть">
+        </button>
+        <form name="updateAvatar" class="popup__form popup__form_type_updateAvatar" novalidate>
+            <h3 class="popup__title popup__title_updateAvatar">Обновить аватар</h3>
+            <div class="popup__input-form-item">
+                <input id="place-link-input"
+                class="popup__input popup__input_type_place-link" 
+                type="url" 
+                name="avatar" 
+                placeholder="Ссылка на фото"
+                required>
+                <span class="popup__input-error place-link-input-error"></span>
+            </div>
+            <button class="popup__save-button popup__save-button_inactive" type="submit" value="Сохранить">Сохранить</button>
+        </form>
+    </section>
+</div>
+
+
 <!-- Попап увеличение загруженого фото -->
         <div class="popup popup_type_zoom-img">
             <section class="popup__zoom-container popup__container-close">
@@ -117,7 +158,10 @@
             <img class="element__photo">
             <div class="element__place">
                 <h2 class="element__name"></h2>
-                <button class="element__like" type="button"></button>
+                <div class="element__placeLike">
+                    <button class="element__like" type="button"></button>
+                    <span class="element__numLike"></span>
+                </div>
             </div>
         </div>
     </template>

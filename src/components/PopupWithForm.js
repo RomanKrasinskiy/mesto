@@ -4,7 +4,6 @@ export class PopupWithForm extends Popup {
     constructor(popupSelector, selectors, handleSumbitForm) {
         super(popupSelector, selectors);
         this._handleSumbitForm = handleSumbitForm;
-        this._form = this._popup.querySelector(selectors.form);
         this._inputList = Array.from(this._form.querySelectorAll(selectors.input));
     }
     // получаем значение инпута, вкладываем в новый объект и его возвращаем
@@ -14,7 +13,6 @@ export class PopupWithForm extends Popup {
             this._inputValues[input.name] = input.value;
         }); 
         return this._inputValues;
-       
     }
     // слушатель помимо стандартного закрытия попапа передает объект с новыми данными
     setEventListeners() {
@@ -22,7 +20,6 @@ export class PopupWithForm extends Popup {
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._handleSumbitForm(this._getInputValues());
-            this.close();
         })
     }
     close() {

@@ -1,20 +1,23 @@
 export class UserInfo {
-    constructor({ userName, aboutUser }) {
-        this._userName = document.querySelector(userName);
-        this._aboutUser = document.querySelector(aboutUser);
+    constructor({ name, about, avatar }) {
+        this._name = document.querySelector(name);
+        this._about = document.querySelector(about);
+        this._avatar = document.querySelector(avatar);
     }
     // возвращаем объект с текущими данными DOM
     getUserInfo() {
         const userInfo = {};
-        userInfo.userName = this._userName.textContent;
-        userInfo.aboutUser = this._aboutUser.textContent;
+        userInfo.name = this._name.textContent;
+        userInfo.about = this._about.textContent;
+        userInfo.avatar = this._avatar.src;
+        userInfo._id = this._id;
         return userInfo;
     }
-    
     // вставляем в DOM полученные данные из инпутов
     setUserInfo(inputValues) {
-        this._userName.textContent = inputValues.userName;
-        this._aboutUser.textContent = inputValues.aboutUser;
-        
+        this._name.textContent = inputValues.name;
+        this._about.textContent = inputValues.about;
+        this._avatar.src = inputValues.avatar;
+        this._id = inputValues._id;
     }
 }
