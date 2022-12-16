@@ -7,7 +7,7 @@ export class PopupWithForm extends Popup {
         this._inputList = Array.from(this._form.querySelectorAll(selectors.input));
     }
     // получаем значение инпута, вкладываем в новый объект и его возвращаем
-    _getInputValues() {
+    getInputValues() {
         this._inputValues = {};
         this._inputList.forEach(input => {
             this._inputValues[input.name] = input.value;
@@ -19,7 +19,7 @@ export class PopupWithForm extends Popup {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this._handleSumbitForm(this._getInputValues());
+            this._handleSumbitForm(this.getInputValues());
         })
     }
     close() {

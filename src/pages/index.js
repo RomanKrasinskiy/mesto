@@ -31,14 +31,16 @@ const apiConfig = {
 
 const api = new Api(apiConfig);
 
-api.getInfoProfile()
-.then(function(ownerData) {
-    newUserInfo.setUserInfo(ownerData);
-});
-api.getAllCards()
-.then(cardsListData => {
-  cardsList.rendererAll(cardsListData.reverse());
-});
+function getDataAllpage() {
+  Promise.all([api.getInfoProfile(), api.getAllCards()])
+    .then(([userData, cardsListData]) => {
+      newUserInfo.setUserInfo(userData); // тут установка данных пользователя
+      cardsList.rendererAll(cardsListData.reverse()); // и тут отрисовка карточек
+    })
+    .catch((err) => 
+      console.log(`Ошибка: ${err}`)) // тут ловим ошибку
+}
+getDataAllpage();
 
 const addCardFormValidation = new FormValidator (formConfigSelector, formElementAddCard);
 addCardFormValidation.enableValidation();
@@ -111,6 +113,7 @@ function handleCardSubmit(inputValues) {
   api.addCard(inputValues)
     .then((data) => cardsList.addItem(createNewCard(data)))
     .then(() => popupAddCard.close())
+    .catch((err) => console.log(err))
     .finally(() => popupAddCard.activateLoader(false))
 };
 
@@ -125,9 +128,10 @@ function handleEditProfileSubmit(inputValues) {
 };
 function handleAvatarSubmit() {
   popupUserAvatar.activateLoader(true, 'Сохранение...')
-  api.changeAvatar(popupUserAvatar._getInputValues())
+  api.changeAvatar(popupUserAvatar.getInputValues())
     .then((data) => newUserInfo.setUserInfo(data))
     .then(() => popupUserAvatar.close())
+    .catch((err) => console.log(err))
     .finally(() => popupUserAvatar.activateLoader(false))
 }
 // Подгрузка маленькой img, и наименований в попапZoom
